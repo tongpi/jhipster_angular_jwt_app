@@ -1,6 +1,6 @@
 # app2
 
-本应用是一个使用JHipster 6.0.1生成的单体应用，前端使用了angular 6,后端是spring。认证方式为JWT。产品面世数据库为mysql，开发模式数据库为H2。
+本应用是一个使用JHipster 6.0.1生成的单体应用，前端使用了angular 6,后端是spring。认证方式为JWT。产品模式数据库为mysql，开发模式数据库为H2。
 创建了一个包含三个字段的实体role。
 , 你可以在这里查看JHipster的帮助信息 [https://www.jhipster.tech/documentation-archive/v6.0.1](https://www.jhipster.tech/documentation-archive/v6.0.1).
 
