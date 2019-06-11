@@ -1,38 +1,38 @@
 # app2
 
-This application was generated using JHipster 6.0.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.0.1](https://www.jhipster.tech/documentation-archive/v6.0.1).
+本应用是一个使用JHipster 6.0.1生成的单体应用，前端使用了angular 6,后端是spring。认证方式为JWT。产品模式数据库为mysql，开发模式数据库为H2。
+创建了一个包含三个字段的实体role。
+, 你可以在这里查看JHipster的帮助信息 [https://www.jhipster.tech/documentation-archive/v6.0.1](https://www.jhipster.tech/documentation-archive/v6.0.1).
 
 ## Development
 
-Before you can build this project, you must install and configure the following dependencies on your machine:
+在生成此项目之前，必须在计算机上安装和配置以下依赖项:
 
-1. [Node.js][]: We use Node to run a development web server and build the project.
-   Depending on your system, you can install Node either from source or as a pre-packaged bundle.
+1. [Node.js][]: 我们使用Node运行开发Web服务器并构建项目.
+   根据您的系统，您可以从源安装Node，也可以作为预打包包安装Node.
 
-After installing Node, you should be able to run the following command to install development tools.
-You will only need to run this command when dependencies change in [package.json](package.json).
+安装Node之后，您应该能够运行以下命令来安装开发工具.
+仅当依赖项在 [package.json](package.json)中更改时才需要运行此命令.
 
     npm install
 
-We use npm scripts and [Webpack][] as our build system.
+我们使用 npm 脚本和 [Webpack][] 来构建系统.
 
-Run the following commands in two separate terminals to create a blissful development experience where your browser
-auto-refreshes when files change on your hard drive.
+在两个独立的终端中运行以下命令，在浏览器中创建一个良好的开发体验：当硬盘上的文件更改时自动刷新.
 
     ./mvnw
     npm start
 
-Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
-specifying a newer version in [package.json](package.json). You can also run `npm update` and `npm install` to manage dependencies.
-Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
+Npm 同样用来管理本系统中所依赖的 CSS 和 JavaScript . 你可以通过修改[package.json](package.json)文件来升级依赖包的版本. 你同样可以运行 `npm update` 和 `npm install` 来管理依赖.
+添加 `help` 标志在npm命令之后可以查看如何使用这些命令. 例如, `npm help update`.
 
-The `npm run` command will list all of the scripts available to run for this project.
+ `npm run` 命令将列出可为此项目运行的所有脚本.
 
 ### Service workers
 
-Service workers are commented by default, to enable them please uncomment the following code.
+Service workers在默认情况下被注释，若要启用它们，请取消注释以下代码.
 
-- The service worker registering script in index.html
+- service worker 注册脚本在index.html文件中
 
 ```html
 <script>
@@ -44,152 +44,153 @@ Service workers are commented by default, to enable them please uncomment the fo
 </script>
 ```
 
-Note: workbox creates the respective service worker and dynamically generate the `service-worker.js`
+注意: workbox 创建各自的服务工作者并动态生成 `service-worker.js`
 
-### Managing dependencies
+### 管理依赖
 
-For example, to add [Leaflet][] library as a runtime dependency of your application, you would run following command:
+例如, 要添加 [Leaflet][] 库作为你的语言的运行时依赖, 你可以运行下面的命令:
 
     npm install --save --save-exact leaflet
 
-To benefit from TypeScript type definitions from [DefinitelyTyped][] repository in development, you would run following command:
+要从开发中的 [DefinitelyTyped][]存储库中的typescript类型定义中获益，您将运行以下命令：
 
     npm install --save-dev --save-exact @types/leaflet
 
-Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
-Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
+你可以导入库安装说明中提及的 JS 和 CSS 文件，以便 [Webpack][] 知道:
+编辑 [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) 文件:
 
 ```
 import 'leaflet/dist/leaflet.js';
 ```
 
-Edit [src/main/webapp/content/css/vendor.css](src/main/webapp/content/css/vendor.css) file:
+编辑 [src/main/webapp/content/css/vendor.css](src/main/webapp/content/css/vendor.css) 文件:
 
 ```
 @import '~leaflet/dist/leaflet.css';
 ```
 
-Note: there are still few other things remaining to do for Leaflet that we won't detail here.
+注意: 还有几件事要做，我们在这里不详述.
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+有关如何使用Jhipster开发的更多说明，请查看 [Using JHipster in development][].
 
-### Using angular-cli
+### 使用 angular-cli
 
-You can also use [Angular CLI][] to generate some custom client code.
+你还可以使用 [Angular CLI][] 来生成一些客户端代码.
 
-For example, the following command:
+例如, 下面的命令:
 
     ng generate component my-component
 
-will generate few files:
+将会生成一些文件:
 
     create src/main/webapp/app/my-component/my-component.component.html
     create src/main/webapp/app/my-component/my-component.component.ts
     update src/main/webapp/app/app.module.ts
 
-### Doing API-First development using openapi-generator
+### 使用OpenAPI生成器进行API优先的开发
 
-[OpenAPI-Generator]() is configured for this application. You can generate API code from the `src/main/resources/swagger/api.yml` definition file by running:
+[OpenAPI-Generator]() 已经在本系统中正确配置。你可以从 `src/main/resources/swagger/api.yml` 文件定义生成 API 代码，只需要运行命令:
 
 ```bash
 ./mvnw generate-sources
 ```
 
-Then implements the generated delegate classes with `@Service` classes.
+然后实现生成的委托类使用 `@Service` 注解.
 
-To edit the `api.yml` definition file, you can use a tool such as [Swagger-Editor](). Start a local instance of the swagger-editor using docker by running: `docker-compose -f src/main/docker/swagger-editor.yml up -d`. The editor will then be reachable at [http://localhost:7742](http://localhost:7742).
+要编辑 `api.yml` 定义文件, 你可以使用一些工具如： [Swagger-Editor](). 使用如下的docker命令启动一个swagger-editor的本地实例: 
+`docker-compose -f src/main/docker/swagger-editor.yml up -d`. 
+该编辑器就可以在 [http://localhost:7742](http://localhost:7742)访问.
 
-Refer to [Doing API-First development][] for more details.
+参考 [Doing API-First development][] 查看更多细节.
 
-## Building for production
+## 构建产品
 
-### Packaging as jar
+### 打包为jar
 
-To build the final jar and optimize the app2 application for production, run:
+要打包最终的jar 并优化本应用用于产品化部署, 运行:
 
     ./mvnw -Pprod clean verify
 
-This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
-To ensure everything worked, run:
+这将连接并缩小web客户端的CSS和JavaScript文件。它还将修改“index.html”，以便引用这些新文件。
+确保一切正常, 运行:
 
     java -jar target/*.jar
 
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
+然后在你的浏览器中访问 [http://localhost:8080](http://localhost:8080).
 
-Refer to [Using JHipster in production][] for more details.
+请参阅 [Using JHipster in production][] 查看更多细节.
 
-### Packaging as war
+### 打包为war
 
-To package your application as a war in order to deploy it to an application server, run:
+要打包本应用为war以便它部署到现有应用服务器, 运行:
 
     ./mvnw -Pprod,war clean verify
 
-## Testing
+## 测试
 
-To launch your application's tests, run:
+要开始进行应用的测试, 运行:
 
     ./mvnw verify
 
-### Client tests
+### 客户端测试
 
-Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
+单元测试是靠 [Jest][] 运行并且使用[Jasmine][]编写的. 他们位于 [src/test/javascript/](src/test/javascript/) 并能够被使用下面命令运行:
 
     npm test
 
-For more information, refer to the [Running tests page][].
+更多细节请查阅 [Running tests page][].
 
-### Code quality
+### 代码质量
 
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
+系统使用Sonar来分析代码质量. 你可以用docker启动一个本地的Sonar服务器 (访问 http://localhost:9001) 使用命令:
 
 ```
 docker-compose -f src/main/docker/sonar.yml up -d
 ```
 
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
-
-Then, run a Sonar analysis:
+你可以运行Sonar分析，使用[sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) 或者使用maven插件
+然后, 运行一个Sonar分析:
 
 ```
 ./mvnw -Pprod clean verify sonar:sonar
 ```
 
-If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+果需要重新运行Sonar阶段，请确保至少指定“initialize”阶段，因为Sonar属性是从sonar-project.properties文件加载的。.
 
 ```
 ./mvnw initialize sonar:sonar
 ```
 
-or
+或者
 
-For more information, refer to the [Code quality page][].
+更多详情请查阅 [Code quality page][].
 
-## Using Docker to simplify development (optional)
+## 使用Docker来简化开发 (可选)
 
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+你可以使用Docker来提升你的JHipster开发体验. 一系列位于 [src/main/docker](src/main/docker) 文件夹下的docker-compose配置文件来调用需要的第三方服务.
 
-For example, to start a mysql database in a docker container, run:
+例如, 要在容器中启动mysql数据库, 运行:
 
     docker-compose -f src/main/docker/mysql.yml up -d
 
-To stop it and remove the container, run:
+要停止并删除容器, 运行:
 
     docker-compose -f src/main/docker/mysql.yml down
 
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
+您还可以将应用程序及其依赖的所有服务完全固定化.
+要实现这一点，首先要通过运行:
 
     ./mvnw -Pprod verify jib:dockerBuild
 
-Then run:
+然后运行:
 
     docker-compose -f src/main/docker/app.yml up -d
 
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
+更多细节请查阅[Using Docker and Docker-Compose][], 此页还包含有关docker-compose子生成器（`jhipster docker-compose`）的信息，它能够为一个或多个Jhipster应用程序生成Docker配置.
 
-## Continuous Integration (optional)
+## 持续集成 (可选)
 
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
+要为本项目配置 CI , 运行 ci-cd sub-generator (`jhipster ci-cd`), 这将允许您为许多持续集成系统生成配置文件. 有关详细信息，请参阅 [Setting up Continuous Integration][] 页面.
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
 [jhipster 6.0.1 archive]: https://www.jhipster.tech/documentation-archive/v6.0.1
