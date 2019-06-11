@@ -12,6 +12,76 @@
 
 ## 开发须知
 
+### 本应用是如何生成的？
+
+#### 使用docker安装jhipster
+
+```shell
+#启动容器
+docker container run --name jhipster -v /opt/jhipster:/home/jhipster -v ~/.m2:/home/jhipster/.m2 -p 9180:8080 -p 9100:9000 -p 3001:3001 -d -t jhipster/jhipster
+
+#登录容器
+docker exec -it -u root jhipster bash
+#在容器中创建应用
+mkdir app2
+cd app2
+jhipster   #回车后依据提示输入一系列参数（参数介绍和过程参见前面列出的JHipster生成单体架构的应用示例）就可以生成类似于本应用的应用
+
+```
+
+#### 遇到的问题
+1、由于JHipster生成的应用的pom.xml缺省依赖了最新版本，如下所示，这个组件在官方的仓库中并未发布，导致无法进行mvnw test
+
+```xml
+<jhipster-dependencies.version>3.0.2-SNAPSHOT</jhipster-dependencies.version>
+```
+解决办法：修改为3.0.1
+
+2、io.github.jhipster.config.logging.LoggingUtils.*不存在导致src/main/java/gds/myapp/config/LoggingConfiguration.java文件无法编译
+
+解决办法：打开LoggingConfiguration.java文件，把相关的几行代码注释掉
+
+```java
+……
+
+// import static io.github.jhipster.config.logging.LoggingUtils.*;
+
+……
+@Configuration
+public class LoggingConfiguration {
+
+    public LoggingConfiguration(@Value("${spring.application.name}") String appName,
+                                @Value("${server.port}") String serverPort,
+                                JHipsterProperties jHipsterProperties,
+                                ObjectMapper mapper) throws JsonProcessingException {
+
+        LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("app_name", appName);
+        map.put("app_port", serverPort);
+        String customFields = mapper.writeValueAsString(map);
+
+        JHipsterProperties.Logging loggingProperties = jHipsterProperties.getLogging();
+        JHipsterProperties.Logging.Logstash logstashProperties = loggingProperties.getLogstash();
+
+        if (loggingProperties.isUseJsonFormat()) {
+            //addJsonConsoleAppender(context, customFields);
+        }
+        if (logstashProperties.isEnabled()) {
+            //addLogstashTcpSocketAppender(context, customFields, logstashProperties);
+        }
+        if (loggingProperties.isUseJsonFormat() || logstashProperties.isEnabled()) {
+            //addContextListener(context, customFields, loggingProperties);
+        }
+        if (jHipsterProperties.getMetrics().getLogs().isEnabled()) {
+            //setMetricsMarkerLogbackFilter(context, loggingProperties.isUseJsonFormat());
+        }
+    }
+}
+```
+
+
 在生成此项目之前，必须在计算机上安装和配置以下依赖项:
 
 1. [Node.js][]: 我们使用Node运行开发Web服务器并构建项目.
