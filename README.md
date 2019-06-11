@@ -1,3 +1,9 @@
+# 参考文档
+
+[JHipster生成单体架构的应用示例 - 羽客 - 博客园](https://www.cnblogs.com/yorkwu/p/9325659.html)
+
+[jhipster - 标签 - 羽客 - 博客园](https://www.cnblogs.com/yorkwu/tag/jhipster/)
+
 # app2
 
 本应用是一个使用JHipster 6.0.1生成的单体应用，前端使用了angular 6,后端是spring。认证方式为JWT。产品模式数据库为mysql，开发模式数据库为H2。
@@ -104,6 +110,43 @@ import 'leaflet/dist/leaflet.js';
 参考 [Doing API-First development][] 查看更多细节.
 
 ## 构建产品
+
+### 数据库配置
+
+#### 启动一个数据库容器
+
+在命令行，任意目录下，启动一个mysql容器；如果本地没有mysql:5的镜像，容器启动时会自动去docker store下载镜像。
+
+```shell
+docker container run --name app2-mysql -e MYSQL_ROOT_PASSWORD=a1b2c3 -d -p 32768:3306 mysql:5
+```
+
+#### 在数据库中创建schema
+
+通过客户端连接上刚启动的数据库容器，添加一个名为`app2`的schema。应用启动时会自动在这个schema里面创建数据表。
+
+```shell
+docker exec -it -u root app2-mysql bash
+mysql -uroot -pa1b2c3
+mysq>CREATE SCHEMA app2;
+```
+
+#### 修改应用的数据库配置
+
+spring.datasource.url中的端口号`32768`，与步骤4.1中**-p**参数指定的值保持一致。
+spring.datasource.url中的schema名称`app1`，与步骤4.2中添加的schema名称保持一致。
+spring.datasource.password的值`my-secret-pw`，与步骤4.1中`MYSQL_ROOT_PASSWORD`参数指定的值保持一致。
+
+```shell
+$ cd app2/
+$ vi src/main/resources/config/application-prod.yml
+# 修改数据库连接相关配置
+spring:
+    datasource:
+        url: jdbc:mysql://192.168.3.69:32768/app2?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: root
+        password: a1b2c3
+```
 
 ### 打包为jar
 
